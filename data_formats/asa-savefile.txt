@@ -1,0 +1,72 @@
+Current version is 14 for UE 5.5 format
+
+SQL Lite Database
+
+------------------------------------------------------------------------------------------------------------------------
+Save Header (custom table key SaveHeader) {
+  0E 00 - Version - short (2 bytes) ##14##
+  0A 02 00 00 F5 03 00 00 - Unknown - long (8 bytes) or 2x int (4 bytes) - version 14+ ##4350801871370 or 522 and 1013##
+  FE E5 02 00 - Class Name Table Offset - int (4 bytes) ##189950##
+  6F D5 D3 4D 59 C4 A8 41 - Game Time - double (8 bytes) ##207760550.913738##
+  8E 11 00 00 - Unknown - int (4 byte) - version 12+ ##4494##
+  D0 0E 00 00 - Map Grid Count - uint (4 bytes) ##3792##
+  Map Grid Entries (3792 entries)
+  00 00 00 00 - Unknown - int (4 byte) - seems to always be 0 so might be a guard ##0##
+  01 00 00 00 - Unknown Table Count - uint (4 byte) ##1##
+  Unknown Table Entries
+  6B 16 00 00 - Class Name Table Count - uint (4 bytes) ##5739##
+  Class Name Table Entries - start at 2E5FE (189950) offset
+}
+
+Map Grid Entry {
+  29 00 00 00 52 61 67 6E 61 72 6F 6B 5F 57 50 5F 4D 61 69 6E 47 72 69 64 5F 4C 36 5F 58 30 5F 59 30 5F 44 4C 37 46 41 41 31 32 33 38 00 - string (variable length) ##Ragnarok_WP_MainGrid_L6_X0_Y0_DL7FAA1238##
+  FF FF FF FF - int (4 bytes) - guard ##-1##
+}
+
+Unknown Table Entry {
+  C5 0A 00 00 - Unknown - int or uint? (4 bytes) ##2757##
+  01 00 00 00 - Unknown - int or uint? (4 bytes) ##1##
+  0E 00 00 00 53 69 67 6E 5F 57 61 72 4D 61 70 5F 33 00 - string (variable length) ##Sign_WarMap_3##
+}
+
+Class Name Table Entry {
+  8F 04 EE 1D - ID - uint (4 bytes) ##502137999##
+  23 00 00 00 2F 53 63 72 69 70 74 2F 53 68 6F 6F 74 65 72 47 61 6D 65 2E 4E 50 43 5A 6F 6E 65 4D 61 6E 61 67 65 72 00 - Object Name - string (variable length) ##/Script/ShooterGame.NPCZoneManager##
+}
+------------------------------------------------------------------------------------------------------------------------
+Game Mode Custom Bytes (custom table key GameModeCustomBytes) {
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - Unknown? all zeroes for Ragnarok test map - (20 bytes)
+}
+------------------------------------------------------------------------------------------------------------------------
+Actor Transforms (custom table key ActorTransforms) {
+  Actor Transform Entries
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - Empty UUID - uuid (16 bytes)
+}
+
+Actor Transform Entry {
+  71 DE 7F 15 F6 AF 21 41 B8 78 86 3E 2E AB 43 4A - Actor Transform UUID - uuid (16 bytes)
+  00 00 00 20 A8 E3 D3 40 00 00 00 20 44 ED D1 C0 00 00 00 00 C2 80 BF 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 F0 3F - actor_transform (56 bytes) ##20366.626953125,-18357.064453125,8064.7578125,0,0,0,1##
+}
+------------------------------------------------------------------------------------------------------------------------
+Actor Transforms Delta (custom table key ActorTransformsDelta) {
+  Actor Transform Entries? (unknown if the format is the same until find a map with entries here)
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - Empty UUID - uuid (16 bytes)
+}
+------------------------------------------------------------------------------------------------------------------------
+Game Objects Table (game table) {
+  Game Object ID (game table key) {
+    71 DE 7F 15 F6 AF 21 41 B8 78 86 3E 2E AB 43 4A - Game Object UUID - uuid (16 bytes)
+  }
+
+  Game Object (game table value) {
+    3E 5D CB 64 - Class Name ID - uint (4 bytes) ##1691049278## (matches entry in object name table)
+    00 00 00 00 - Object ID - uint (4 bytes) ##0##
+    00 00 00 00
+    01 00 00 00 - Object Name Table Count - uint (4 bytes) ##1##
+    Object Name (string) Entries -> 12 00 00 00 4E 50 43 5A 6F 6E 65 56 6F 6C 75 6D 65 5F 34 35 38 00 - Object Name Entry - string (variable length) ##NPCZoneVolume_458##
+    00 00 00 00 - End Object Name Entries - uint (4 bytes) ##0##
+    0A 00 22 26 AD 09 00 00 00 00 01 00 00 00 71 DE 7F 15 F6 AF 21 41 B8 78 86 3E 2E AB 43 4A - Object Data (variable length)
+  }
+}
+
+

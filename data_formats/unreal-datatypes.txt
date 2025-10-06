@@ -1,0 +1,132 @@
+string {
+    0C 00 00 00 - Length - uint (4 bytes) ##12##
+    52 61 67 6E 61 72 6F 6B 5F 57 50 - String - variable (Length - 1) ##Ragnarok_WP##
+    00 - Null Term
+}
+
+actor_transform {
+    00 00 00 20 A8 E3 D3 40 - x - double (8 bytes) ##20366.626953125##
+    00 00 00 20 44 ED D1 C0 - y - double (8 bytes) ##-18357.064453125##
+    00 00 00 00 C2 80 BF 40 - z - double (8 bytes) ##8064.7578125##
+    00 00 00 00 00 00 00 00 - yaw - double (8 bytes) ##0##
+    00 00 00 00 00 00 00 00 - pitch - double (8 bytes) ##0##
+    00 00 00 00 00 00 00 00 - roll - double (8 bytes) ##0##
+    00 00 00 00 00 00 F0 3F - scale - double (8 bytes) ##1##
+}
+
+ArrayProperty {
+    ********************************************************************************************************************
+    01 00 00 00 - Array Header - uint (4 bytes) ##1##
+    3B DA 82 0C - Array Property Type ID - uint (4 bytes) ##ObjectProperty##
+    00 00 00 00 00 00 00 00
+    70 00 00 00 - Array Byte Length - uint (4 bytes) ##112##
+    00
+    06 00 00 00 - Array Entry Count - uint (4 bytes) ##6##
+    --------------------------------------------------------------------------------------------------------------------
+    00 00 62 80 29 83 6E D0 79 44 A3 A3 5E 15 8C C3 DE 8E - Array Value - variable
+    00 00 98 E9 08 73 90 4E 8D 44 88 7E 34 32 27 A9 A7 62 - Array Value - variable
+    00 00 FA 0F 63 36 57 DE E5 44 A9 86 3D B1 F9 EF A6 04 - Array Value - variable
+    00 00 BF BC 9D 99 38 70 DB 49 9D 5B 36 8F 41 C2 9A EE - Array Value - variable
+    00 00 DB 28 6E 28 E4 DE 19 4B 95 08 59 CD 63 4E F9 D2 - Array Value - variable
+    00 00 70 C4 10 36 84 2A 54 4C B9 D8 BA 1F C5 64 CC 16 - Array Value - variable
+    ********************************************************************************************************************
+}
+
+StructProperty {
+    ====================================================================================================================
+    01 00 00 00 - Struct Header - uint (4 bytes) ##1##
+    16 D0 7F 46 - Struct Type ID - uint (4 bytes) ##ItemNetID##
+    00 00 00 00
+    01 00 00 00 - Struct Header - uint (4 bytes) ##1##
+    B9 E2 6C FC - Struct Blueprint Type ID - uint (4 bytes) ##/Script/ShooterGame##
+    00 00 00 00 00 00 00 00
+    42 00 00 00 - Struct Byte Length - uint (4 bytes) ##66##
+    00
+    --------------------------------------------------------------------------------------------------------------------
+    9A 90 86 7F - Property Name ID - uint (4 bytes) ##ItemID1##
+    00 00 00 00
+    5B 9E 09 B5 - Property Type ID - uint (4 bytes) ##UInt32Property##
+    00 00 00 00 00 00 00 00
+    04 00 00 00 - Property Length - uint (4 bytes) ##4##
+    00
+    70 8D 87 08 - Property Value - uint (4 bytes) ##143101296##
+    5A 68 D9 4C - Property Name ID - uint (4 bytes) ##ItemID2##
+    00 00 00 00
+    5B 9E 09 B5 - Property Type ID - uint (4 bytes) ##UInt32Property##
+    00 00 00 00 00 00 00 00
+    04 00 00 00 - Property Length - uint (4 bytes) ##4##
+    00
+    40 C1 02 26 - Property Value - uint (4 bytes) ##637714752##
+    22 26 AD 09 - Property ID - uint (4 bytes) ##None##
+    00 00 00 00
+    ====================================================================================================================
+}
+
+UInt32Property {
+    9A 90 86 7F - Property Name ID - uint (4 bytes) ##ItemID1##
+    00 00 00 00
+    5B 9E 09 B5 - Property Type ID - uint (4 bytes) ##UInt32Property##
+    00 00 00 00 00 00 00 00
+    04 00 00 00 - Property Length - uint (4 bytes) ##4##
+    00
+    70 8D 87 08 - Property Value - uint (4 bytes) ##143101296##
+}
+
+IntProperty {
+    D1 31 78 87 - Property Name ID - uint (4 bytes) ##SavedForceDefaultInventoryRefreshVersion##
+    00 00 00 00
+    71 B2 FA F3 - Property Type ID - uint (4 bytes) ##IntProperty##
+    00 00 00 00 00 00 00 00
+    04 00 00 00 - Property Length - uint (4 bytes) ##4##
+    00
+    06 00 00 00 - Property Value - int (4 bytes) ##6##
+}
+
+BoolProperty {
+    13 FF A0 EB - Property Name ID - uint (4 bytes) ##bCanSlot##
+    00 00 00 00
+    AA 26 82 4D - Property Type ID - uint (4 bytes) ##BoolProperty##
+    00 00 00 00 00 00 00 00
+    00 00 00 00 - Property Length - uint (4 bytes) ##0##
+    10 - Property Value - byte ##true##
+}
+
+FloatProperty {
+    2A 8D 88 E9 - Property Name ID - uint (4 bytes) ##SavedDurability##
+    00 00 00 00
+    3A 23 FD 69 - Property Type ID - uint (4 bytes) ##FloatProperty##
+    00 00 00 00 00 00 00 00
+    04 00 00 00 - Property Length - uint (4 bytes) ##4##
+    00
+    00 00 80 3F - Property Value - float (4 bytes) ##1##
+}
+
+DoubleProperty {
+    AF 51 CE DA - Property Name ID - uint (4 bytes) ##OriginalCreationTime##
+    00 00 00 00
+    0D D9 8C 90 - Property Type ID - uint (4 bytes) ##DoubleProperty##
+    00 00 00 00 00 00 00 00
+    08 00 00 00 - Property Length - uint (4 bytes) ##8##
+    00
+    00 00 00 00 84 D7 A7 41 - Property Value - double (4 bytes) ##200000000##
+}
+
+ObjectProperty {
+    33 97 01 43 - Property Name ID - uint (4 bytes) ##OwnerInventory##
+    00 00 00 00
+    3B DA 82 0C - Property Type ID - uint (4 bytes) ##ObjectProperty##
+    00 00 00 00 00 00 00 00
+    12 00 00 00 - Property Length - uint (4 bytes) ##18##
+    00
+    00 00 0A EC 42 38 0F 61 67 44 86 53 35 66 37 53 D7 AE - Property Value - ushort + uuid (18 bytes)
+}
+
+ByteProperty {
+    9C 16 AD 1C - Property Name ID - uint (4 bytes) ##ItemVersion##
+    00 00 00 00
+    B2 B4 4F 96 - Property Type ID - uint (4 bytes) ##ByteProperty##
+    00 00 00 00 00 00 00 00
+    01 00 00 00 - Property Length - uint (4 bytes) ##1##
+    00
+    02 - Property Value - byte ##2##
+}

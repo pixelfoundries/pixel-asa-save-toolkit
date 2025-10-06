@@ -1,0 +1,10 @@
+{
+  "name": "pixel-asa-save-toolkit",
+  "version": "0.0.1",
+  "description": "Pixel Foundries Ark ASA Save Toolkit for reading and writing Ark ASA save files.",
+  "homepage": "https://www.pixelfoundries.com",
+  "bugs": {
+    "email": "pixelfoundries@gmail.com"
+  },
+  "license": "UNLICENSED"
+}
