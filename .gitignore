@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 # IDEA Intellij Project Files
 .idea
+
+# UML work file
+.~ml

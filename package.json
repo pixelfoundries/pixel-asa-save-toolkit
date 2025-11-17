@@ -2,9 +2,31 @@
   "name": "pixel-asa-save-toolkit",
   "version": "0.0.1",
   "description": "Pixel Foundries Ark ASA Save Toolkit for reading and writing Ark ASA save files.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "npx mocha --reporter xunit --reporter-options output=./junit/testUnit.xml test",
+    "lint": "oxlint src --type-aware",
+    "lint:ci": "oxlint src --type-aware --format checkstyle > lint.xml",
+    "lint:fix": "oxlint src --color=never` --type-aware --fix",
+    "jsdoc": "typedoc src/index.ts docs/tsdoc && tsdoc2md --files src/index.ts > docs/API.md"
+  },
+  "type": "module",
   "homepage": "https://www.pixelfoundries.com",
   "bugs": {
     "email": "pixelfoundries@gmail.com"
   },
-  "license": "UNLICENSED"
+  "license": "ISC",
+  "author": "Doug Kasten <dkasten@pixelfoundries.com>",
+  "devDependencies": {
+    "oxlint": "^1.28.0",
+    "typedoc": "^0.28.14",
+    "tsdoc-to-markdown": "^0.1.0",
+    "should": "^13.2.3",
+    "vitest": "^4.0.8"
+  },
+  "dependencies": {
+    "@types/node": "^24.7.2",
+    "sqlite3": "^5.1.7",
+    "uuid": "^13.0.0"
+  }
 }
