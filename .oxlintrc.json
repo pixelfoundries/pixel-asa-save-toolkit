@@ -9,7 +9,6 @@
     "eslint",
     "oxc",
     "import",
-    "jsdoc",
     "node"
   ],
   "rules": {

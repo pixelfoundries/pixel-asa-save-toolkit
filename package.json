@@ -4,11 +4,12 @@
   "description": "Pixel Foundries Ark ASA Save Toolkit for reading and writing Ark ASA save files.",
   "main": "index.ts",
   "scripts": {
+    "md": "runmd --output=README.md README_js.md",
     "test": "npx mocha --reporter xunit --reporter-options output=./junit/testUnit.xml test",
     "lint": "oxlint src --type-aware",
     "lint:ci": "oxlint src --type-aware --format checkstyle > lint.xml",
     "lint:fix": "oxlint src --color=never` --type-aware --fix",
-    "jsdoc": "typedoc src/index.ts docs/tsdoc && tsdoc2md --files src/index.ts > docs/API.md"
+    "typedoc": "rimraf ./docs/markdown && rimraf ./docs/typedoc && typedoc --options typedoc-html.json && typedoc --options typedoc-markdown.json"
   },
   "type": "module",
   "homepage": "https://www.pixelfoundries.com",
@@ -18,9 +19,12 @@
   "license": "ISC",
   "author": "Doug Kasten <dkasten@pixelfoundries.com>",
   "devDependencies": {
+    "rimraf": "^6.1.0",
     "oxlint": "^1.28.0",
     "typedoc": "^0.28.14",
-    "tsdoc-to-markdown": "^0.1.0",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typedoc-material-theme": "^1.4.1",
+    "runmd": "^1.4.1",
     "should": "^13.2.3",
     "vitest": "^4.0.8"
   },

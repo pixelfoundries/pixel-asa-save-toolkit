@@ -2,7 +2,95 @@ import { Buffer } from 'node:buffer';
 import { v4 as uuidv4, parse } from 'uuid';
 
 /**
+ * Minimum Float value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MIN_FLOAT: number = -3.4028235e38;
+/**
+ * Maximum Float value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_FLOAT: number = 3.4028235e38;
+/**
+ * Minimum Double value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MIN_DOUBLE: number = -Number.MAX_VALUE;
+/**
+ * Maximum Double value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_DOUBLE: number = Number.MAX_VALUE;
+/**
+ * Minimum 16-bit Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MIN_INT16: number = -32768;
+/**
+ * Maximum 16-bit Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_INT16: number = 32768;
+/**
+ * Maximum 16-bit unsigned Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_UINT16: number = 65535;
+/**
+ * Minimum 32-bit Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MIN_INT32: number = -2147483648;
+/**
+ * Maximum 32-bit Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_INT32: number = 2147483648;
+/**
+ * Maximum 32-bit unsigned Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_UINT32: number = 4294967295;
+/**
+ * Minimum 64-bit Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MIN_INT64: bigint = -9223372036854775808n;
+/**
+ * Maximum 64-bit Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_INT64: bigint = 9223372036854775808n;
+/**
+ * Maximum 64-bit unsigned Integer value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_UINT64: bigint = 18446744073709551615n;
+/**
+ * Maximum byte value supported in Unreal Engine
+ * @group Unreal Engine Types
+ * @category Constants
+ */
+export const MAX_BYTE: number = 255;
+
+/**
  * Storage class that represents an Unreal Engine string value. Used with SaveWriter classes to generate save file data.
+ *
+ * @group Unreal Engine Types
+ * @category Primitive Types
  *
  * @author dkasten
  * @since 1.0.0
@@ -89,6 +177,9 @@ export class UnrealStrProperty {
 /**
  * Storage class that represents an Unreal name entry which is used for all string names in Ark ASA save files.
  *
+ * @group Unreal Engine Types
+ * @category Primitive Types
+ *
  * @author dkasten
  * @since 1.0.0
  */
@@ -169,6 +260,9 @@ export class UnrealName {
 
 /**
  * Storage class that represents an Unreal actor transform entry used for all game objects in Ark ASA save files.
+ *
+ * @group Unreal Engine Types
+ * @category Primitive Types
  *
  * @author dkasten
  * @since 1.0.0
@@ -342,6 +436,9 @@ export class UnrealActorTransform {
 
 /**
  * Storage class that represents an entry for an unknown table in save file header.
+ *
+ * @group Unreal Engine Types
+ * @category Ark ASA Types
  *
  * @author dkasten
  * @since 1.0.0

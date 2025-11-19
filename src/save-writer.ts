@@ -6,6 +6,8 @@ import { UnrealName } from "./unreal-types.js";
  * Abstract base class for formatting Ark ASA save files in to different file formats contained in SaveObject class instances.
  *
  * @abstract
+ * @group Save Writers
+ * @category Base Classes
  *
  * @author dkasten
  * @since 1.0.0
@@ -70,6 +72,13 @@ export default abstract class SaveWriter {
 //
 // }
 
+/**
+ * Storage class for save file decorator pattern.
+ *
+ * @group Save Writers
+ * @category Base Classes
+ *
+ */
 export class SaveDecorator {
   public flags: SaveComponentFlags;
   public id: number;

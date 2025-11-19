@@ -1,0 +1,20 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src/index.ts"],
+  "entryPointStrategy": "expand",
+  "plugin": [
+    "typedoc-plugin-markdown"
+  ],
+  "out": "./docs/markdown",
+  "name": "Ark ASA Save File Toolkit SDK",
+  "categorizeByGroup": true,
+  "navigation": {
+    "includeGroups": true,
+    "includeCategories": true
+  },
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "hideGenerator": true,
+  "readme": "README.md",
+  "tsconfig": "tsconfig.json"
+}

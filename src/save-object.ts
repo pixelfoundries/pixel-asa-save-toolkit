@@ -1,26 +1,14 @@
 import { validate as validateUuid } from 'uuid';
 import { Buffer } from 'node:buffer';
-import { UnrealName, UnrealActorTransform, UnrealStrProperty } from './unreal-types.js';
+import * as UnrealTypes from './unreal-types.js';
 import { default as SaveWriter } from './save-writer.js';
-
-export const MIN_FLOAT: number = -3.4028235e38;
-export const MAX_FLOAT: number = 3.4028235e38;
-export const MIN_DOUBLE: number = -Number.MAX_VALUE;
-export const MAX_DOUBLE: number = Number.MAX_VALUE;
-export const MIN_INT16: number = -32768;
-export const MAX_INT16: number = 32768;
-export const MAX_UINT16: number = 65535;
-export const MIN_INT32: number = -2147483648;
-export const MAX_INT32: number = 2147483648;
-export const MAX_UINT32: number = 4294967295;
-export const MIN_INT64: bigint = -9223372036854775808n;
-export const MAX_INT64: bigint = 9223372036854775808n;
-export const MAX_UINT64: bigint = 18446744073709551615n;
-export const MAX_BYTE: number = 255;
 
 
 /**
  * Enum for flags indicating options for {@link SaveComponent} class to indicate what values exist and what typ of component it is.
+ *
+ * @group Ark ASA Save Objects
+ * @category Enums
  *
  * @readonly
  * @enum {number}
@@ -42,6 +30,9 @@ export enum SaveComponentFlags {
 /**
  * Storage class for storing components that make up an object. These can be the root object, struct, or an array.
  *
+ * @group Ark ASA Save Objects
+ * @category Classes
+ *
  * @author dkasten
  * @since 1.0.0
  */
@@ -49,10 +40,10 @@ export class SaveComponent {
   protected flags: number; // Stores SaveComponentFlags
   protected id: number;
   protected uuid: string;
-  protected name: UnrealName;
-  protected type: UnrealName;
-  protected blueprint: UnrealName | null;
-  protected actorTransform: UnrealActorTransform | null;
+  protected name: UnrealTypes.UnrealName;
+  protected type: UnrealTypes.UnrealName;
+  protected blueprint: UnrealTypes.UnrealName | null;
+  protected actorTransform: UnrealTypes.UnrealActorTransform | null;
   protected componentMap: Map<string, SaveComponent>;
   protected headerMap: Map<string, UnrealProperty>
   protected propertyMap: Map<string, UnrealProperty>;
@@ -64,10 +55,10 @@ export class SaveComponent {
    * @param {SaveComponentFlags} flags - The flags describing the type of component and what optional values exist.
    * @param {number} id - The ID number for this component.
    * @param {string} uuid - String form of the UUID for this component which is how Unreal Engine identifies this component.
-   * @param {UnrealName} name - Unreal Engine name for this component which corresponds to an entry in the Unreal Engine name table.
-   * @param {UnrealName} type - Unreal Engine type for this component which corresponds to an entry in the Unreal Engine name table.
-   * @param {UnrealName} blueprint - Unreal Engine blueprint for this component which corresponds to an entry in the Unreal Engine name table.
-   * @param {UnrealActorTransform} actorTransform - Unreal Engine actor transform that indicates the location of the component in 3D space.
+   * @param {UnrealTypes.UnrealName} name - Unreal Engine name for this component which corresponds to an entry in the Unreal Engine name table.
+   * @param {UnrealTypes.UnrealName} type - Unreal Engine type for this component which corresponds to an entry in the Unreal Engine name table.
+   * @param {UnrealTypes.UnrealName} blueprint - Unreal Engine blueprint for this component which corresponds to an entry in the Unreal Engine name table.
+   * @param {UnrealTypes.UnrealActorTransform} actorTransform - Unreal Engine actor transform that indicates the location of the component in 3D space.
    * @param {SaveWriter} saveWriter - Save writer instance that will write the save file information to a new file in a specific format.
    *
    * @throws {TypeError} If UUID provided is not a valid UUID.
@@ -79,10 +70,10 @@ export class SaveComponent {
   constructor (flags: number,
                id: number,
                uuid: string,
-               name: UnrealName,
-               type: UnrealName,
-               blueprint: UnrealName | null = null,
-               actorTransform: UnrealActorTransform | null = null,
+               name: UnrealTypes.UnrealName,
+               type: UnrealTypes.UnrealName,
+               blueprint: UnrealTypes.UnrealName | null = null,
+               actorTransform: UnrealTypes.UnrealActorTransform | null = null,
                saveWriter: SaveWriter | null = null) {
     // Validate UUID
     if (!validateUuid(uuid)) {
@@ -166,6 +157,9 @@ export class SaveComponent {
 /**
  * Enum for flags indicating value types for an individual Unreal property stored in the generic {@link UnrealProperty} class.
  *
+ * @group Ark ASA Save Objects
+ * @category Enums
+ *
  * @readonly
  * @enum {number}
  *
@@ -190,13 +184,16 @@ export enum UnrealPropertyFlags {
 /**
  * Storage class for storing an Unreal property value that is stored in an ASA save file.
  *
+ * @group Ark ASA Save Objects
+ * @category Classes
+ *
  * @author dkasten
  * @since 1.0.0
  */
 export class UnrealProperty {
   protected flags: number; // Stores UnrealPropertyFlags
-  protected name: UnrealName;
-  protected type: UnrealName;
+  protected name: UnrealTypes.UnrealName;
+  protected type: UnrealTypes.UnrealName;
   protected length: number;
   protected value: any;
   protected objectFlags: Array<number>; // Array of flags storing UnrealPropertyFlags
@@ -206,8 +203,8 @@ export class UnrealProperty {
    * Constructor for an Unreal property instance that sets all values in the instance.
    *
    * @param {UnrealPropertyFlags} flags - The flags describing the type of Unreal property.
-   * @param {UnrealName} name - Unreal Engine name for this component which corresponds to an entry in the Unreal Engine name table.
-   * @param {UnrealName} type - Unreal Engine type for this component which corresponds to an entry in the Unreal Engine name table.
+   * @param {UnrealTypes.UnrealName} name - Unreal Engine name for this component which corresponds to an entry in the Unreal Engine name table.
+   * @param {UnrealTypes.UnrealName} type - Unreal Engine type for this component which corresponds to an entry in the Unreal Engine name table.
    * @param {number} length - The byte length of stored data in the ASA save file.
    * @param {any} value - Actual value of the Unreal property with the type of the data described in {@link UnrealProperty#flags} value.
    * @param {Array<UnrealPropertyFlags>} objectFlags - Array of Unreal property flags describing the makeup of the object values.
@@ -219,7 +216,7 @@ export class UnrealProperty {
    * @author dkasten
    * @since 1.0.0
    */
-  constructor (flags: number, name: UnrealName, type: UnrealName, length: number, value: any, objectFlags?: Array<number>, objectValues?: Array<any>) {
+  constructor (flags: number, name: UnrealTypes.UnrealName, type: UnrealTypes.UnrealName, length: number, value: any, objectFlags?: Array<number>, objectValues?: Array<any>) {
     this.flags = flags;
     this.name = name;
     this.type = type;
@@ -280,36 +277,36 @@ export class UnrealProperty {
   /**
    * Getter for Unreal name instance that indicates the name of this property which corresponds to an entry in the Unreal Engine name table.
    *
-   * @returns {UnrealName} Current Unreal name instance
+   * @returns {UnrealTypes.UnrealName} Current Unreal name instance
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public getName(): UnrealName {
+  public getName(): UnrealTypes.UnrealName {
     return this.name;
   }
 
   /**
    * Getter for Unreal name instance that indicates the Unreal type of this property which corresponds to an entry in the Unreal Engine name table.
    *
-   * @returns {UnrealName} Current Unreal type instance
+   * @returns {UnrealTypes.UnrealName} Current Unreal type instance
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public getType(): UnrealName {
+  public getType(): UnrealTypes.UnrealName {
     return this.type;
   }
 
   /**
    * Setter for Unreal name instance that indicates the Unreal type of this property which corresponds to an entry in the Unreal Engine name table.
    *
-   * @param {UnrealName} type - The type as an Unreal name instance to set for this property.
+   * @param {UnrealTypes.UnrealName} type - The type as an Unreal name instance to set for this property.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public setType(type: UnrealName): void {
+  public setType(type: UnrealTypes.UnrealName): void {
     this.type = type;
   }
 
@@ -538,43 +535,43 @@ export class UnrealProperty {
     let valueRanges: Array<any> = [];
     if ((flags & UnrealPropertyFlags.DOUBLE) === UnrealPropertyFlags.DOUBLE) {
       valueType = 'number';
-      valueRanges = [MIN_DOUBLE, MAX_DOUBLE];
+      valueRanges = [UnrealTypes.MIN_DOUBLE, UnrealTypes.MAX_DOUBLE];
     } else if ((flags & UnrealPropertyFlags.FLOAT) === UnrealPropertyFlags.FLOAT) {
       valueType = 'number';
-      valueRanges = [MIN_FLOAT, MAX_FLOAT];
+      valueRanges = [UnrealTypes.MIN_FLOAT, UnrealTypes.MAX_FLOAT];
     } else if ((flags & UnrealPropertyFlags.BOOLEAN) === UnrealPropertyFlags.BOOLEAN) {
       valueType = 'boolean';
     } else if ((flags & UnrealPropertyFlags.INT32) === UnrealPropertyFlags.INT32) {
       valueType = 'number';
       if ((flags & UnrealPropertyFlags.UNSIGNED) === UnrealPropertyFlags.UNSIGNED) {
-        valueRanges = [0, MAX_UINT32];
+        valueRanges = [0, UnrealTypes.MAX_UINT32];
       } else {
-        valueRanges = [MIN_INT32, MAX_INT32];
+        valueRanges = [UnrealTypes.MIN_INT32, UnrealTypes.MAX_INT32];
       }
     } else if ((flags & UnrealPropertyFlags.STRING) === UnrealPropertyFlags.STRING) {
       valueType = 'string';
     } else if ((flags & UnrealPropertyFlags.BYTE) === UnrealPropertyFlags.BYTE) {
       valueType = 'number';
-      valueRanges = [0, MAX_BYTE];
+      valueRanges = [0, UnrealTypes.MAX_BYTE];
     } else if ((flags & UnrealPropertyFlags.INT16) === UnrealPropertyFlags.INT16) {
       valueType = 'number';
       if ((flags & UnrealPropertyFlags.UNSIGNED) === UnrealPropertyFlags.UNSIGNED) {
-        valueRanges = [0, MAX_UINT16];
+        valueRanges = [0, UnrealTypes.MAX_UINT16];
       } else {
-        valueRanges = [MIN_INT16, MAX_INT16];
+        valueRanges = [UnrealTypes.MIN_INT16, UnrealTypes.MAX_INT16];
       }
     } else if ((flags & UnrealPropertyFlags.INT64) === UnrealPropertyFlags.INT64) {
       valueType = 'bigint';
       if ((flags & UnrealPropertyFlags.UNSIGNED) === UnrealPropertyFlags.UNSIGNED) {
-        valueRanges = [0, MAX_UINT64];
+        valueRanges = [0, UnrealTypes.MAX_UINT64];
       } else {
-        valueRanges = [MIN_INT64, MAX_INT64];
+        valueRanges = [UnrealTypes.MIN_INT64, UnrealTypes.MAX_INT64];
       }
     }
 
     // Check value type and range against the type and range based on the flags set
     if (valueType === 'string') {
-      return value instanceof UnrealStrProperty;
+      return value instanceof UnrealTypes.UnrealStrProperty;
     } else {
       if (typeof value === valueType) {
         if (valueType === 'number' || valueType === 'bigint') {
@@ -591,6 +588,15 @@ export class UnrealProperty {
   }
 }
 
+/**
+ * Root save object that represents an entry in the SQL Lite database that is internal to the Ark ASA save file structure.
+ *
+ * @group Ark ASA Save Objects
+ * @category Classes
+ *
+ * @author dkasten
+ * @since 1.0.0
+ */
 export default class SaveObject extends SaveComponent {
 
 }
