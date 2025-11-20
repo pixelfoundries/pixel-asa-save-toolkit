@@ -1,0 +1,8 @@
+{
+  "ci": {
+    "repoBranchBase": "main",
+    "trackBranches": ["main"]
+  },
+  "files": [
+  ]
+}

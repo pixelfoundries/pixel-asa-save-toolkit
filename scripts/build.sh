@@ -13,8 +13,9 @@ set -e # exit on error
 ROOT=$(builtin cd $(pwd)/$(dirname "$0")/..; pwd)
 
 # Prep TS output dir
+DIST_DIR="$ROOT/dist"
 NODE_DIST_DIR="$ROOT/dist-node"
-echo "Building in $NODE_DIST_DIR"
+echo "Building in $DIST_DIR and $NODE_DIST_DIR"
 
 cd "$ROOT" || exit 1
 

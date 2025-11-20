@@ -3,7 +3,6 @@ import { Buffer } from 'node:buffer';
 import * as UnrealTypes from './unreal-types.js';
 import { default as SaveWriter } from './save-writer.js';
 
-
 /**
  * Enum for flags indicating options for {@link SaveComponent} class to indicate what values exist and what typ of component it is.
  *
@@ -25,7 +24,6 @@ export enum SaveComponentFlags {
   TRANSFORM = 1 << 4,
   BLUEPRINT = 1 << 5,
 }
-
 
 /**
  * Storage class for storing components that make up an object. These can be the root object, struct, or an array.
@@ -67,14 +65,16 @@ export class SaveComponent {
    * @author dkasten
    * @since 1.0.0
    */
-  constructor (flags: number,
-               id: number,
-               uuid: string,
-               name: UnrealTypes.UnrealName,
-               type: UnrealTypes.UnrealName,
-               blueprint: UnrealTypes.UnrealName | null = null,
-               actorTransform: UnrealTypes.UnrealActorTransform | null = null,
-               saveWriter: SaveWriter | null = null) {
+  constructor(
+    flags: number,
+    id: number,
+    uuid: string,
+    name: UnrealTypes.UnrealName,
+    type: UnrealTypes.UnrealName,
+    blueprint: UnrealTypes.UnrealName | null = null,
+    actorTransform: UnrealTypes.UnrealActorTransform | null = null,
+    saveWriter: SaveWriter | null = null
+  ) {
     // Validate UUID
     if (!validateUuid(uuid)) {
       throw new TypeError('SaveComponent: UUID value is invalid');
@@ -108,7 +108,7 @@ export class SaveComponent {
    * @author dkasten
    * @since 1.0.0
    */
-  protected setSaveWriter (writer: SaveWriter): void {
+  protected setSaveWriter(writer: SaveWriter): void {
     this.saveWriter = writer;
   }
 
@@ -135,17 +135,26 @@ export class SaveComponent {
     let typeFlagFound = false;
     if ((flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT) {
       typeFlagFound = true;
-      if (((flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY) || ((flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT)) {
+      if (
+        (flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY ||
+        (flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT
+      ) {
         return false;
       }
     } else if ((flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY) {
       typeFlagFound = true;
-      if (((flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT) || ((flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT)) {
+      if (
+        (flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT ||
+        (flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT
+      ) {
         return false;
       }
     } else if ((flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT) {
       typeFlagFound = true;
-      if (((flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY) || ((flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT)) {
+      if (
+        (flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY ||
+        (flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT
+      ) {
         return false;
       }
     }
@@ -195,9 +204,9 @@ export class UnrealProperty {
   protected name: UnrealTypes.UnrealName;
   protected type: UnrealTypes.UnrealName;
   protected length: number;
-  protected value: any;
+  protected value: unknown;
   protected objectFlags: Array<number>; // Array of flags storing UnrealPropertyFlags
-  protected objectValues: Array<any>; // Array of values storing object values
+  protected objectValues: Array<unknown>; // Array of values storing object values
 
   /**
    * Constructor for an Unreal property instance that sets all values in the instance.
@@ -206,9 +215,9 @@ export class UnrealProperty {
    * @param {UnrealTypes.UnrealName} name - Unreal Engine name for this component which corresponds to an entry in the Unreal Engine name table.
    * @param {UnrealTypes.UnrealName} type - Unreal Engine type for this component which corresponds to an entry in the Unreal Engine name table.
    * @param {number} length - The byte length of stored data in the ASA save file.
-   * @param {any} value - Actual value of the Unreal property with the type of the data described in {@link UnrealProperty#flags} value.
+   * @param {unknown} value - Actual value of the Unreal property with the type of the data described in {@link UnrealProperty#flags} value.
    * @param {Array<UnrealPropertyFlags>} objectFlags - Array of Unreal property flags describing the makeup of the object values.
-   * @param {Array<any>} objectValues - Array of actual values that are stored as a single blob in the ASA save file.
+   * @param {Array<unknown} objectValues - Array of actual values that are stored as a single blob in the ASA save file.
    *
    * @throws {RangeError} If provided object value array and object flags array are not the same length.
    * @throws {TypeError} If property flags are set to an object but no object values or flags were provided.
@@ -216,7 +225,15 @@ export class UnrealProperty {
    * @author dkasten
    * @since 1.0.0
    */
-  constructor (flags: number, name: UnrealTypes.UnrealName, type: UnrealTypes.UnrealName, length: number, value: any, objectFlags?: Array<number>, objectValues?: Array<any>) {
+  constructor(
+    flags: number,
+    name: UnrealTypes.UnrealName,
+    type: UnrealTypes.UnrealName,
+    length: number,
+    value: unknown,
+    objectFlags?: Array<number>,
+    objectValues?: Array<unknown>
+  ) {
     this.flags = flags;
     this.name = name;
     this.type = type;
