@@ -2,9 +2,7 @@
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["./src/index.ts"],
   "entryPointStrategy": "expand",
-  "plugin": [
-    "typedoc-material-theme"
-  ],
+  "plugin": ["typedoc-material-theme"],
   "themeColor": "#2f66c6",
   "out": "./docs/typedoc",
   "name": "Ark ASA Save File Toolkit SDK",

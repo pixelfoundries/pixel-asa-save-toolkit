@@ -7,9 +7,7 @@ import path from 'node:path';
 
 program
   .name('iodd')
-  .description(
-    '(I)nstall (o)ptional (d)ev (d)ependencies from package.json#optionalDevDependencies'
-  )
+  .description('(I)nstall (o)ptional (d)ev (d)ependencies from package.json#optionalDevDependencies')
   .option('-v, --verbose', 'Output npm install output to stdout/stderr')
   .option('-r, --required', 'Exit with non-zero code if dependencies fail to install')
   .argument('[packagePath]', 'Path to package.json file', './package.json')

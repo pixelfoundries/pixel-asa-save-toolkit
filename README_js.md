@@ -4,8 +4,8 @@ For reading in and writing out Ark ASA save files including writing out save fil
 
 - **Complete** - Support for all ASA save file objects including Unreal Engine 5.5 format
 - **Cross-platform** - Support for...
-    - [Typescript](#support)
-    - [NodeJS](#support)
+  - [Typescript](#support)
+  - [NodeJS](#support)
 - **CLI** - [`ark-asa-save` command line](#command-line) utility
 
 ## Quickstart
