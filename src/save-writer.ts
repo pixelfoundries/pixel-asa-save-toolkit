@@ -1,6 +1,5 @@
-import { SaveComponentFlags, UnrealProperty } from "./save-object.js";
-import { UnrealName } from "./unreal-types.js";
-
+import { SaveComponentFlags, UnrealProperty } from './save-object.js';
+import { UnrealName } from './unreal-types.js';
 
 /**
  * Abstract base class for formatting Ark ASA save files in to different file formats contained in SaveObject class instances.

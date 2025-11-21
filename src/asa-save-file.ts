@@ -4,6 +4,4 @@
  * @group Ark ASA Save File
  * @category Classes
  */
-export default class AsaSaveFile {
-
-}
+export default class AsaSaveFile {}

@@ -27,6 +27,8 @@ export default [
     rules: {
       '@typescript-eslint/no-redeclare': 'error',
       '@typescript-eslint/no-require-imports': 'off',
+      '@typescript-eslint/no-unused-vars': ['error'],
+      'no-unused-vars': 'off',
       'no-redeclare': 'off',
       'no-var': ['error'],
       curly: ['error', 'all'],

@@ -1,7 +1,7 @@
 import { validate as validateUuid } from 'uuid';
 import { Buffer } from 'node:buffer';
 import * as UnrealTypes from './unreal-types.js';
-import { default as SaveWriter } from './save-writer.js';
+import SaveWriter from './save-writer.js';
 
 /**
  * Enum for flags indicating options for {@link SaveComponent} class to indicate what values exist and what typ of component it is.
@@ -43,7 +43,7 @@ export class SaveComponent {
   protected blueprint: UnrealTypes.UnrealName | null;
   protected actorTransform: UnrealTypes.UnrealActorTransform | null;
   protected componentMap: Map<string, SaveComponent>;
-  protected headerMap: Map<string, UnrealProperty>
+  protected headerMap: Map<string, UnrealProperty>;
   protected propertyMap: Map<string, UnrealProperty>;
   protected saveWriter: SaveWriter | null;
 
@@ -135,26 +135,17 @@ export class SaveComponent {
     let typeFlagFound = false;
     if ((flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT) {
       typeFlagFound = true;
-      if (
-        (flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY ||
-        (flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT
-      ) {
+      if ((flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY || (flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT) {
         return false;
       }
     } else if ((flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY) {
       typeFlagFound = true;
-      if (
-        (flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT ||
-        (flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT
-      ) {
+      if ((flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT || (flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT) {
         return false;
       }
     } else if ((flags & SaveComponentFlags.STRUCT) === SaveComponentFlags.STRUCT) {
       typeFlagFound = true;
-      if (
-        (flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY ||
-        (flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT
-      ) {
+      if ((flags & SaveComponentFlags.ARRAY) === SaveComponentFlags.ARRAY || (flags & SaveComponentFlags.OBJECT) === SaveComponentFlags.OBJECT) {
         return false;
       }
     }
@@ -342,25 +333,25 @@ export class UnrealProperty {
   /**
    * Getter for current value of this Unreal property instance which can be any type and needs flags to understand how to interpret the value.
    *
-   * @returns {any} The current value for this Unreal property.
+   * @returns {unknown} The current value for this Unreal property.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public getValue(): any {
+  public getValue(): unknown {
     return this.value;
   }
 
   /**
    * Setter for current value of this Unreal property instance and will validate the value if not unsafe or by default.
    *
-   * @param {any} value - The value to set for this Unreal property instance and can be any type.
+   * @param {unknown} value - The value to set for this Unreal property instance and can be any type.
    * @param {boolean} unsafe - If the provided value should be checked for correct type and range for the current flag settings.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public setValue(value: any, unsafe: boolean = false): void {
+  public setValue(value: unknown, unsafe: boolean = false): void {
     // If unsafe or buffer (raw binary data) then skip all type and range checks and just set value
     if (!unsafe || (this.flags & UnrealPropertyFlags.BUFFER) === UnrealPropertyFlags.BUFFER) {
       // Check if object flag is set and throw an error if it is as this is the wrong function
@@ -440,12 +431,12 @@ export class UnrealProperty {
   /**
    * Getter for all object values for this property that is being stored.
    *
-   * @returns {Array<any>} The full list of object values encoded in to this property. Will return empty array if no values are set.
+   * @returns {Array<unknown>} The full list of object values encoded in to this property. Will return empty array if no values are set.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public getObjectValues(): Array<any> {
+  public getObjectValues(): Array<unknown> {
     if (this.objectValues !== null) {
       return this.objectValues;
     } else {
@@ -456,13 +447,13 @@ export class UnrealProperty {
   /**
    * Setter for all object values for this property this is to be stored.
    *
-   * @param values {Array<any>} - The full list of object values to be encoded in to this property.
+   * @param values {Array<unknown>} - The full list of object values to be encoded in to this property.
    * @param unsafe {boolean} - If value checks should be skipped and should just be trusted. Used for known good values.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public setObjectValues(values: Array<any>, unsafe: boolean = false) {
+  public setObjectValues(values: Array<unknown>, unsafe: boolean = false) {
     // If unsafe then skip all type and range checks and just set value
     if (!unsafe) {
       if ((this.flags & UnrealPropertyFlags.BUFFER) === UnrealPropertyFlags.BUFFER) {
@@ -487,10 +478,10 @@ export class UnrealProperty {
    * Setter for an individual object value to save a value to be encoded in to the object property.
    *
    * @param index {number} - The index in the object value array to set.
-   * @param value {any} - The actual value to set in the object value array.
+   * @param value {unknown} - The actual value to set in the object value array.
    * @param unsafe {boolean} - If value checks should be skipped and should just be trusted. Used for known good values.
    */
-  public setObjectValue(index: number, value: any, unsafe: boolean = false) {
+  public setObjectValue(index: number, value: unknown, unsafe: boolean = false) {
     // If unsafe or buffer (raw binary data) then skip all type and range checks and just set value
     if (!unsafe || (this.flags & UnrealPropertyFlags.BUFFER) === UnrealPropertyFlags.BUFFER) {
       // Check value based on current flags set and the given value
@@ -501,7 +492,6 @@ export class UnrealProperty {
       }
     }
 
-    if (this.objectFlags && this.objectFlags[index]) {}
     this.objectValues[index] = value;
   }
 
@@ -521,9 +511,11 @@ export class UnrealProperty {
     // First check if UNSIGNED is set and if so then check for one of the three int types and remove unsigned in temp
     // variable to later confirm only one other flag is set
     if ((flags & UnrealPropertyFlags.UNSIGNED) === UnrealPropertyFlags.UNSIGNED) {
-      if ((flags & UnrealPropertyFlags.INT16) === UnrealPropertyFlags.INT16
-        || (flags & UnrealPropertyFlags.INT32) === UnrealPropertyFlags.INT32
-        || (flags & UnrealPropertyFlags.INT64) === UnrealPropertyFlags.INT64) {
+      if (
+        (flags & UnrealPropertyFlags.INT16) === UnrealPropertyFlags.INT16 ||
+        (flags & UnrealPropertyFlags.INT32) === UnrealPropertyFlags.INT32 ||
+        (flags & UnrealPropertyFlags.INT64) === UnrealPropertyFlags.INT64
+      ) {
         flagsCheck &= ~UnrealPropertyFlags.UNSIGNED;
       } else {
         return false;
@@ -539,17 +531,17 @@ export class UnrealProperty {
    *
    * @private
    * @static
-   * @param value {any} - The value to check for validity.
+   * @param value {unknown} - The value to check for validity.
    * @param flags {UnrealPropertyFlags} - The flags to use for determining the value type and range.
    * @returns {boolean} If the value check succeeded.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  private static checkValue(value: any, flags: number): boolean {
+  private static checkValue(value: unknown, flags: number): boolean {
     // Get type and range that value should be based on flags
     let valueType: string = '';
-    let valueRanges: Array<any> = [];
+    let valueRanges: Array<unknown> = [];
     if ((flags & UnrealPropertyFlags.DOUBLE) === UnrealPropertyFlags.DOUBLE) {
       valueType = 'number';
       valueRanges = [UnrealTypes.MIN_DOUBLE, UnrealTypes.MAX_DOUBLE];
@@ -590,9 +582,14 @@ export class UnrealProperty {
     if (valueType === 'string') {
       return value instanceof UnrealTypes.UnrealStrProperty;
     } else {
+      // eslint-disable-next-line valid-typeof
       if (typeof value === valueType) {
-        if (valueType === 'number' || valueType === 'bigint') {
-          if (value < valueRanges[0] || value > valueRanges[1]) {
+        if (valueType === 'number') {
+          if ((value as number) < (valueRanges[0] as number) || (value as number) > (valueRanges[1] as number)) {
+            return false;
+          }
+        } else if (valueType === 'bigint') {
+          if ((value as bigint) < (valueRanges[0] as bigint) || (value as bigint) > (valueRanges[1] as bigint)) {
             return false;
           }
         }
@@ -614,6 +611,4 @@ export class UnrealProperty {
  * @author dkasten
  * @since 1.0.0
  */
-export default class SaveObject extends SaveComponent {
-
-}
+export default class SaveObject extends SaveComponent {}

@@ -122,7 +122,7 @@ export class UnrealStrProperty {
    * @since 1.0.0
    */
   public generate(): Buffer {
-    let returnValue: Buffer = Buffer.alloc(this.length + 4);
+    const returnValue: Buffer = Buffer.alloc(this.length + 4);
 
     // First write length as uint32
     returnValue.writeUint32LE(this.length, 0);
@@ -172,8 +172,6 @@ export class UnrealStrProperty {
   }
 }
 
-
-
 /**
  * Storage class that represents an Unreal name entry which is used for all string names in Ark ASA save files.
  *
@@ -210,7 +208,7 @@ export class UnrealName {
    * @since 1.0.0
    */
   public generate(): Buffer {
-    let idBuffer: Buffer = Buffer.alloc(4);
+    const idBuffer: Buffer = Buffer.alloc(4);
 
     // Write ID as uint32 first
     idBuffer.writeUint32LE(this.id, 0);
@@ -255,8 +253,6 @@ export class UnrealName {
     return this.id;
   }
 }
-
-
 
 /**
  * Storage class that represents an Unreal actor transform entry used for all game objects in Ark ASA save files.
@@ -386,7 +382,7 @@ export class UnrealActorTransform {
    * @author dkasten
    * @since 1.0.0
    */
-  public getRotation(): { yaw: number, pitch: number, roll: number} {
+  public getRotation(): { yaw: number; pitch: number; roll: number } {
     const yaw = this.yaw;
     const pitch = this.pitch;
     const roll = this.roll;
