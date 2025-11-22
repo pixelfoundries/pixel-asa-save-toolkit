@@ -34,7 +34,7 @@ cp -pr "$DIST_DIR" "$NODE_DIST_DIR"
 
 # Remove browser files in node build
 for FILE in ${NODE_DIST_DIR}/*-browser*; do
-  rm -f $FILE
+  rm -f $FILE || true
 done
 
 # Move browser files into place for default build
@@ -42,7 +42,7 @@ done
   cd "$DIST_DIR"
 
   for FILE in *-browser*;do
-    mv "$FILE" "${FILE/-browser/}"
+    mv "$FILE" "${FILE/-browser/}" || true
   done
 )
 
