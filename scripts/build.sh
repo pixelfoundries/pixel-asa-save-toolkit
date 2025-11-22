@@ -32,19 +32,19 @@ tsc -p tsconfig.json
 # Clone files for node builds
 cp -pr "$DIST_DIR" "$NODE_DIST_DIR"
 
-## Remove browser files in node build
-#for FILE in ${NODE_DIST_DIR}/*-browser*; do
-#  rm -f $FILE
-#done
-#
-## Move browser files into place for default build
-#(
-#  cd "$DIST_DIR"
-#
-#  for FILE in *-browser*;do
-#    mv "$FILE" "${FILE/-browser/}"
-#  done
-#)
+# Remove browser files in node build
+for FILE in ${NODE_DIST_DIR}/*-browser*; do
+  rm -f $FILE || true
+done
+
+# Move browser files into place for default build
+(
+  cd "$DIST_DIR"
+
+  for FILE in *-browser*;do
+    mv "$FILE" "${FILE/-browser/}" || true
+  done
+)
 
 # Remove type definition files where they're not needed
 (
