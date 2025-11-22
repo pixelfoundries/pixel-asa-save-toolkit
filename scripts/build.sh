@@ -67,4 +67,11 @@ if [ "${1-}" != "--no-pack" ]; then
   mv $BUILD_DIR/pixel-asa-save-toolkit-*.tgz $BUILD_DIR/pixel-asa-save-toolkit.tgz
 fi
 
+echo "ROOT:"
+ls $ROOT
+echo "dist:"
+ls $ROOT/dist
+echo "dist-node"
+ls $ROOT/dist-node
+
 echo "-- fin --"
