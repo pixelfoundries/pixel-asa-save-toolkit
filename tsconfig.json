@@ -28,5 +28,5 @@
     /* If your code does run in the DOM: */
     "lib": ["es2024", "dom", "dom.iterable"]
   },
-  "exclude": ["dist", "examples", "docs"]
+  "exclude": ["dist", "examples", "docs", "./eslint.config.mjs", "./prettier.config.js"]
 }

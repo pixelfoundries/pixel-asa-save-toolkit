@@ -1,11 +1,10 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["./src/index.ts"],
-  "entryPointStrategy": "expand",
+  "entryPoints": ["./src"],
   "plugin": ["typedoc-material-theme"],
   "themeColor": "#2f66c6",
   "out": "./docs/typedoc",
-  "name": "Ark ASA Save File Toolkit SDK",
+  "name": "Pixel ASA Save File Toolkit",
   "categorizeByGroup": true,
   "navigation": {
     "includeGroups": true,

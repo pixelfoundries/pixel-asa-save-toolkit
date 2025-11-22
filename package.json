@@ -5,6 +5,7 @@
   "type": "module",
   "homepage": "https://www.pixelfoundries.com",
   "author": "Doug Kasten <dkasten@pixelfoundries.com>",
+  "license": "MIT",
   "bugs": {
     "email": "pixelfoundries@gmail.com"
   },
@@ -46,12 +47,14 @@
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/js": "^9.39.1",
+    "@types/jest": "^30.0.0",
     "bundlewatch": "^0.4.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.5.0",
     "husky": "^9.1.7",
+    "jest": "^30.2.0",
     "lint-staged": "^16.2.7",
     "neostandard": "^0.12.2",
     "npm-run-all": "^4.1.5",
@@ -66,13 +69,18 @@
     "typescript-eslint": "^8.47.0"
   },
   "scripts": {
-    "build": "./scripts/build.sh",
+    "build": "sh scripts/build.sh",
     "build:watch": "tsc --watch -p tsconfig.json",
     "bundlewatch": "npm run pretest:browser && bundlewatch --config bundlewatch.config.json",
     "docs:diff": "npm run docs && git diff --quiet -I \"[0-9a-f-]{36}\" README.md",
     "docs": "rimraf ./docs/typedoc && typedoc && npm run build && npx runmd --output=README.md README_js.md",
     "eslint:check": "eslint src/ *.[jt]s",
     "eslint:fix": "eslint --fix src/ *.[jt]s",
+    "examples:browser:rollup:build": "cd examples/browser-rollup && npm run build",
+    "examples:browser:webpack:build": "cd examples/browser-webpack && npm run build",
+    "examples:node:esmodules:test": "cd examples/node-esmodules && npm test",
+    "examples:node:jest:test": "cd examples/node-jest && npm test",
+    "examples:node:typescript:test": "cd examples/typescript && npm test",
     "lint": "npm run eslint:check && npm run prettier:check",
     "md": "runmd --watch --output=README.md README_js.md",
     "prepack": "npm run build -- --no-pack",
@@ -80,7 +88,12 @@
     "prepublishOnly": "npm run build",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "release": "standard-version --no-verify"
+    "release": "standard-version --no-verify",
+    "test:benchmark": "cd examples/benchmark && npm test",
+    "test:browser": "wdio run ./wdio.conf.js",
+    "test:node": "npm-run-all --parallel examples:node:**",
+    "test:watch": "node --test --enable-source-maps --watch dist-node/test/*.js",
+    "test": "node --test --enable-source-maps dist-node/test/*.js"
   },
   "repository": {
     "type": "git",

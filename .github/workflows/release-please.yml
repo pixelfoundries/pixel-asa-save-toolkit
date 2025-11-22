@@ -23,7 +23,7 @@ jobs:
       - uses: googleapis/release-please-action@v4
         id: release
         with:
-          token: ${{ secrets.UUID_RELEASE_PLEASE_TOKEN }}
+          token: ${{ secrets.PIXEL_ASA_SAVE_TOOLKIT_RELEASE_PLEASE_TOKEN }}
           release-type: node
 
       - run: echo "Release created?... ${{ steps.release.outputs.release_created }}"

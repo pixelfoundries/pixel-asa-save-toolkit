@@ -141,9 +141,8 @@ vite.config.ts.timestamp-*
 # IDEA Intellij Project Files
 .idea
 
-# UML work file
+# UML backup file
 .~ml
 
-# TS docs generated files
+# Typedocs
 docs/typedoc
-docs/markdown
