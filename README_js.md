@@ -1,3 +1,10 @@
+```javascript --hide
+runmd.onRequire = (path) => {
+  if (path == 'rng') return fun;
+  return path.replace(/^pixel-asa-save-toolkit/, './dist/');
+};
+```
+
 # pixel-asa-save-toolkit [![CI](https://github.com/pixelfoundries/pixel-asa-save-toolkit/workflows/CI/badge.svg)](https://github.com/pixelfoundries/pixel-asa-save-toolkit/actions?query=workflow%3ACI) [![Browser](https://github.com/pixelfoundries/pixel-asa-save-toolkit/workflows/Browser/badge.svg)](https://github.com/pixelfoundries/pixel-asa-save-toolkit/actions/workflows/browser.yml)
 
 For reading in and writing out Ark ASA save files including writing out save file data to other formats including JSON.
