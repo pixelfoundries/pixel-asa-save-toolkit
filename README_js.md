@@ -28,7 +28,7 @@ npm install ark-asa-save-toolkit-sdk
 ```javascript --run
 import { AsaSaveFile } from 'pixel-asa-save-toolkit';
 
-AsaSaveFile('TheIsland_WP.ark'); // RESULT
+const saveFile = new AsaSaveFile('TheIsland_WP.ark'); // RESULT
 ```
 
 ## Support
