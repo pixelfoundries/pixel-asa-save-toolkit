@@ -124,7 +124,6 @@ export class SaveComponent {
    * Helper function to validate flags provide to the object either through constructor or setFlags.
    *
    * @private
-   * @static
    * @param {SaveComponentFlags} flags - Flags value to verify as valid.
    * @returns {boolean} - Where the flags value passed validation or not.
    *
@@ -499,7 +498,6 @@ export class UnrealProperty {
    * Helper static function to check flag values to make sure they are valid.
    *
    * @private
-   * @static
    * @param flags {UnrealPropertyFlags} - The flags value to check for validity.
    * @returns {boolean} If the flag value check succeeded.
    *
@@ -530,7 +528,6 @@ export class UnrealProperty {
    * Helper static function to check values against the currently set flags to make sure the value is valid.
    *
    * @private
-   * @static
    * @param value {unknown} - The value to check for validity.
    * @param flags {UnrealPropertyFlags} - The flags to use for determining the value type and range.
    * @returns {boolean} If the value check succeeded.

@@ -72,7 +72,7 @@
     "build": "./scripts/build.sh",
     "build:watch": "tsc --watch -p tsconfig.json",
     "bundlewatch": "npm run pretest:browser && bundlewatch --config bundlewatch.config.json",
-    "docs:diff": "npm run docs && git diff -I \"[0-9a-f-]{36}\" README.md",
+    "docs:diff": "npm run docs && git diff README.md",
     "docs": "rimraf ./docs/typedoc && typedoc && npm run build && npx runmd --output=README.md README_js.md",
     "eslint:check": "eslint src/ *.[jt]s",
     "eslint:fix": "eslint --fix src/ *.[jt]s",
