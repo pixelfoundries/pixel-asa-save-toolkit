@@ -64,7 +64,7 @@ if [ "${1-}" != "--no-pack" ]; then
   # Create tarball for local installation (in tests and examples)
   echo "Packing tarball"
   npm pack --pack-destination "$BUILD_DIR" > /dev/null 2>&1
-  mv $BUILD_DIR/uuid-*.tgz $BUILD_DIR/uuid.tgz
+  mv $BUILD_DIR/pixel-asa-save-toolkit-*.tgz $BUILD_DIR/uuid.tgz
 fi
 
 echo "-- fin --"
