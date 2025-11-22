@@ -69,7 +69,7 @@
     "typescript-eslint": "^8.47.0"
   },
   "scripts": {
-    "build": "sh scripts/build.sh",
+    "build": "./scripts/build.sh",
     "build:watch": "tsc --watch -p tsconfig.json",
     "bundlewatch": "npm run pretest:browser && bundlewatch --config bundlewatch.config.json",
     "docs:diff": "npm run docs && git diff --quiet -I \"[0-9a-f-]{36}\" README.md",
