@@ -1,5 +1,10 @@
-import { SaveComponentFlags, UnrealProperty } from './save-object.js';
-import { UnrealName } from './unreal-types.js';
+import * as UnrealTypes from './unreal-types.js';
+
+export enum SaveWriterFlags {}
+
+export interface IProperty {
+  byteArrayValue: Uint8Array;
+}
 
 /**
  * Abstract base class for formatting Ark ASA save files in to different file formats contained in SaveObject class instances.
@@ -16,25 +21,25 @@ export default abstract class SaveWriter {
    * Write a property to the file with the current object. Must be overridden by the specific implementation of subclass of the SaveWriter.
    *
    * @abstract
-   * @param propertyValue {UnrealProperty} - Unreal property to write.
+   * @param propertyValue {IProperty} - Unreal property to write.
    * @returns {Buffer} Generated binary buffer containing the written Unreal property.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public abstract writeProperty(propertyValue: UnrealProperty): Buffer;
+  public abstract writeProperty(propertyValue: IProperty): Buffer;
 
   /**
    * Write a header to the file with the current object. Must be overridden by the specific implementation of subclass of the SaveWriter.
    *
    * @abstract
-   * @param headerValue {UnrealProperty} - The Unreal header property to write.
+   * @param headerValue {IProperty} - The Unreal header property to write.
    * @returns {Buffer} Generated binary buffer containing the written Unreal header property.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public abstract writeHeader(headerValue: UnrealProperty): Buffer;
+  public abstract writeHeader(headerValue: IProperty): Buffer;
 
   /**
    * Generate decorator for entering the specified object. Must be overridden by the specific implementation of subclass of the SaveWriter.
@@ -49,7 +54,7 @@ export default abstract class SaveWriter {
    * @author dkasten
    * @since 1.0.0
    */
-  public abstract enterDecorator(name: UnrealName, id: number, simple: boolean, flags: number): Buffer;
+  public abstract enterDecorator(name: string, id: number, simple: boolean, flags: number): Buffer;
 
   /**
    * Generate decorator for exiting the current object. Must be overridden by the specific implementation of subclass of the SaveWriter.
@@ -79,11 +84,11 @@ export default abstract class SaveWriter {
  *
  */
 export class SaveDecorator {
-  public flags: SaveComponentFlags;
+  public flags: number;
   public id: number;
   public simple: boolean;
 
-  constructor(flags: SaveComponentFlags, id: number, simple: boolean) {
+  constructor(flags: SaveWriterFlags, id: number, simple: boolean) {
     this.flags = flags;
     this.id = id;
     this.simple = simple;

@@ -6,3 +6,6 @@ CHANGELOG.md
 .gitignore
 .prettierignore
 .husky
+*.txt
+*.uml
+*.jpg
