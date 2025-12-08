@@ -1,3 +1,4 @@
+import * as Types from './types.js';
 import * as UnrealTypes from './unreal-types.js';
 
 /**
@@ -42,8 +43,8 @@ export class UnrealProperty {
   protected type: UnrealTypes.UnrealName;
   protected length: number;
   protected value: unknown;
-  protected objectFlags: Array<number>; // Array of flags storing UnrealPropertyFlags
-  protected objectValues: Array<unknown>; // Array of values storing object values
+  protected objectFlags: number[]; // Array of flags storing UnrealPropertyFlags
+  protected objectValues: unknown[]; // Array of values storing object values
 
   /**
    * Constructor for an Unreal property instance that sets all values in the instance.
@@ -53,7 +54,7 @@ export class UnrealProperty {
    * @param {UnrealTypes.UnrealName} type - Unreal Engine type for this component which corresponds to an entry in the Unreal Engine name table.
    * @param {number} length - The byte length of stored data in the ASA save file.
    * @param {unknown} value - Actual value of the Unreal property with the type of the data described in {@link UnrealProperty#flags} value.
-   * @param {Array<UnrealPropertyFlags>} objectFlags - Array of Unreal property flags describing the makeup of the object values.
+   * @param {UnrealPropertyFlags[]} objectFlags - Array of Unreal property flags describing the makeup of the object values.
    * @param {Array<unknown} objectValues - Array of actual values that are stored as a single blob in the ASA save file.
    *
    * @throws {RangeError} If provided object value array and object flags array are not the same length.
@@ -68,8 +69,8 @@ export class UnrealProperty {
     type: UnrealTypes.UnrealName,
     length: number,
     value: unknown,
-    objectFlags?: Array<number>,
-    objectValues?: Array<unknown>
+    objectFlags?: number[],
+    objectValues?: unknown[]
   ) {
     this.flags = flags;
     this.name = name;
@@ -97,9 +98,21 @@ export class UnrealProperty {
   /**
    * Generate object that represents this specific Unreal property so it can be passed to the SaveWriter instance by SaveComponent.
    *
-   * @returns {IProperty}
+   * @returns {Types.IUnrealProperty}
    */
-  public generate(): IProperty {}
+  public generate(): Types.IUnrealProperty {
+    return {
+      name: {
+        id: 0,
+        name: '',
+      },
+      type: {
+        id: 0,
+        name: '',
+      },
+      length: 0,
+    };
+  }
 
   /**
    * Setter for Unreal property flags.
@@ -225,12 +238,12 @@ export class UnrealProperty {
   /**
    * Getter for current list of object flags of this Unreal property instance.
    *
-   * @returns {Array<number>} The current list in array form of all object flags.
+   * @returns {number[]} The current list in array form of all object flags.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public getObjectFlags(): Array<number> {
+  public getObjectFlags(): number[] {
     return this.objectFlags;
   }
 
@@ -243,7 +256,7 @@ export class UnrealProperty {
    * @author dkasten
    * @since 1.0.0
    */
-  public setObjectFlags(flags: Array<number>, unsafe: boolean = false): void {
+  public setObjectFlags(flags: number[], unsafe: boolean = false): void {
     // If unsafe then skip all type checks and just set values
     if (!unsafe) {
       // Iterate through all values and use checkFlags function to do tests
@@ -284,12 +297,12 @@ export class UnrealProperty {
   /**
    * Getter for all object values for this property that is being stored.
    *
-   * @returns {Array<unknown>} The full list of object values encoded in to this property. Will return empty array if no values are set.
+   * @returns {unknown[]} The full list of object values encoded in to this property. Will return empty array if no values are set.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public getObjectValues(): Array<unknown> {
+  public getObjectValues(): unknown[] {
     if (this.objectValues !== null) {
       return this.objectValues;
     } else {
@@ -300,13 +313,13 @@ export class UnrealProperty {
   /**
    * Setter for all object values for this property this is to be stored.
    *
-   * @param values {Array<unknown>} - The full list of object values to be encoded in to this property.
+   * @param values {unknown[]} - The full list of object values to be encoded in to this property.
    * @param unsafe {boolean} - If value checks should be skipped and should just be trusted. Used for known good values.
    *
    * @author dkasten
    * @since 1.0.0
    */
-  public setObjectValues(values: Array<unknown>, unsafe: boolean = false) {
+  public setObjectValues(values: unknown[], unsafe: boolean = false) {
     // If unsafe then skip all type and range checks and just set value
     if (!unsafe) {
       if ((this.flags & UnrealPropertyFlags.BUFFER) === UnrealPropertyFlags.BUFFER) {
@@ -392,7 +405,7 @@ export class UnrealProperty {
   private static checkValue(value: unknown, flags: number): boolean {
     // Get type and range that value should be based on flags
     let valueType: string = '';
-    let valueRanges: Array<unknown> = [];
+    let valueRanges: unknown[] = [];
     if ((flags & UnrealPropertyFlags.DOUBLE) === UnrealPropertyFlags.DOUBLE) {
       valueType = 'number';
       valueRanges = [UnrealTypes.MIN_DOUBLE, UnrealTypes.MAX_DOUBLE];

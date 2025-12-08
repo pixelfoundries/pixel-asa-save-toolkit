@@ -1,5 +1,6 @@
 import { validate as validateUuid } from 'uuid';
 import { Buffer } from 'node:buffer';
+import * as Types from './types.js';
 import * as UnrealTypes from './unreal-types.js';
 import { UnrealProperty } from './unreal-property.js';
 import SaveWriter from './save-writer.js';
@@ -113,9 +114,10 @@ export class SaveComponent {
     this.saveWriter = writer;
   }
 
-  protected writeProperty(propertyValue: UnrealProperty): Buffer {
+  protected writeProperty(property: UnrealProperty): Buffer {
     if (this.saveWriter) {
-      return this.saveWriter.writeProperty(propertyValue);
+      const writerProperty: Types.IUnrealProperty = property.generate();
+      return this.saveWriter.writeProperty(writerProperty);
     } else {
       throw new Error('SaveComponent: SaveWriter was not set before trying to write property');
     }
